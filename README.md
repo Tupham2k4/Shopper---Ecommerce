@@ -223,16 +223,5 @@ Admin panel sẽ chạy tại `http://localhost:5173` (hoặc port khác mà Vit
 - [ ] Dashboard với thống kê
 - [ ] Pagination cho danh sách sản phẩm và đơn hàng
 
-## 📄 License
 
-ISC
-
-## 👤 Tác Giả
-
-**Your Name**
-- GitHub: [@yourusername](https://github.com/yourusername)
-
-## 🙏 Lời Cảm Ơn
-
-Cảm ơn tất cả các thư viện và framework mã nguồn mở đã hỗ trợ dự án này!
 
