@@ -217,24 +217,26 @@ const fetchUser = async (req, res, next) => {
 app.post("/addtocart", fetchUser, async (req, res) => {
   console.log("Added", req.body.itemId);
   let userData = await Users.findOne({ _id: req.user.id });
-  userData.cartData[req.body.itemId] += 1;
+  userData.cartData[req.body.itemId] =
+    (userData.cartData[req.body.itemId] || 0) + 1;
   await Users.findOneAndUpdate(
     { _id: req.user.id },
-    { cartData: userData.cart }
+    { cartData: userData.cartData }
   );
-  res.send("Added");
+  res.json({ success: true, message: "Added", cartData: userData.cartData });
 });
 //Creating endpoint to remove product form cartData
 app.post("/removefromcart", fetchUser, async (req, res) => {
   console.log("removed", req.body.itemId);
   let userData = await Users.findOne({ _id: req.user.id });
-  if (userData.cartData[req.body.itemId] > 0)
+  if (userData.cartData[req.body.itemId] > 0) {
     userData.cartData[req.body.itemId] -= 1;
+  }
   await Users.findOneAndUpdate(
     { _id: req.user.id },
-    { cartData: userData.cart }
+    { cartData: userData.cartData }
   );
-  res.send("Removed");
+  res.json({ success: true, message: "Removed", cartData: userData.cartData });
 });
 //Creating endpoint to get cartData
 app.post("/getcart", fetchUser, async (req, res) => {
@@ -242,6 +244,82 @@ app.post("/getcart", fetchUser, async (req, res) => {
   let userData = await Users.findOne({ _id: req.user.id });
   res.json(userData.cartData);
 });
+
+//Schema for Orders
+const Order = mongoose.model("Order", {
+  userId: {
+    type: String,
+    required: true,
+  },
+  fullName: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+  },
+  address: {
+    type: String,
+    required: true,
+  },
+  paymentMethod: {
+    type: String,
+    required: true,
+  },
+  items: {
+    type: Array,
+    required: true,
+  },
+  totalAmount: {
+    type: Number,
+    required: true,
+  },
+  date: {
+    type: Date,
+    default: Date.now,
+  },
+  status: {
+    type: String,
+    default: "pending",
+  },
+});
+
+//Creating endpoint for placing order
+app.post("/placeorder", async (req, res) => {
+  const order = new Order({
+    userId: req.body.userId || "guest",
+    fullName: req.body.fullName,
+    email: req.body.email,
+    address: req.body.address,
+    paymentMethod: req.body.paymentMethod,
+    items: req.body.items,
+    totalAmount: req.body.totalAmount,
+    status: "pending",
+  });
+  await order.save();
+  console.log("Order Placed");
+  res.json({ success: true, message: "Order placed successfully" });
+});
+
+//Creating endpoint to clear cart
+app.post("/clearcart", fetchUser, async (req, res) => {
+  let userData = await Users.findOne({ _id: req.user.id });
+  let cart = {};
+  for (let i = 0; i < 300; i++) {
+    cart[i] = 0;
+  }
+  await Users.findOneAndUpdate({ _id: req.user.id }, { cartData: cart });
+  res.json({ success: true, message: "Cart cleared" });
+});
+
+//Creating endpoint to get all orders
+app.get("/allorders", async (req, res) => {
+  let orders = await Order.find({}).sort({ date: -1 });
+  console.log("All Orders Fetched");
+  res.send(orders);
+});
+
 //API Creation
 app.listen(port, (error) => {
   if (!error) {

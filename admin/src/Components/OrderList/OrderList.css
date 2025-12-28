@@ -1,0 +1,274 @@
+.order-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: 740px;
+  padding: 10px 50px;
+  margin: 30px;
+  border-radius: 6px;
+  background: white;
+}
+
+.order-list h1 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #454545;
+  margin-bottom: 30px;
+}
+
+.order-list-container {
+  width: 100%;
+}
+
+.no-orders {
+  text-align: center;
+  padding: 50px 0;
+  color: #888;
+  font-size: 18px;
+}
+
+.orders-table {
+  width: 100%;
+}
+
+.order-header {
+  display: grid;
+  grid-template-columns: 1fr 2fr 2fr 1fr 1fr 1fr 1.5fr;
+  gap: 15px;
+  padding: 15px 10px;
+  background: #f6f6f6;
+  border-radius: 6px;
+  font-weight: 600;
+  color: #454545;
+  font-size: 14px;
+}
+
+.order-row {
+  display: grid;
+  grid-template-columns: 1fr 2fr 2fr 1fr 1fr 1fr 1.5fr;
+  gap: 15px;
+  padding: 20px 10px;
+  align-items: start;
+  font-size: 14px;
+  color: #454545;
+}
+
+.order-row:hover {
+  background: #f9f9f9;
+}
+
+.order-id {
+  font-weight: 600;
+  color: #ff5a5a;
+}
+
+.order-customer {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.customer-name {
+  font-weight: 600;
+  color: #454545;
+}
+
+.customer-email {
+  color: #666;
+  font-size: 12px;
+}
+
+.customer-address {
+  color: #888;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.order-items {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.item-preview {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.item-image {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid #e2e2e2;
+}
+
+.item-name {
+  font-size: 12px;
+  color: #454545;
+  flex: 1;
+}
+
+.more-items {
+  font-size: 11px;
+  color: #888;
+  font-style: italic;
+  margin-top: 5px;
+}
+
+.order-total {
+  font-weight: 600;
+  color: #ff5a5a;
+  font-size: 16px;
+}
+
+.order-payment {
+  color: #666;
+  font-size: 13px;
+}
+
+.order-status {
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.order-date {
+  color: #666;
+  font-size: 12px;
+}
+
+.order-list hr {
+  border: none;
+  border-top: 1px solid #e2e2e2;
+  margin: 0;
+}
+
+@media (max-width: 1400px) {
+  .order-header,
+  .order-row {
+    grid-template-columns: 0.8fr 2fr 2fr 1fr 1fr 1fr 1.2fr;
+    gap: 10px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .order-list {
+    padding: 10px 30px;
+    margin: 20px;
+  }
+
+  .order-header,
+  .order-row {
+    grid-template-columns: 0.8fr 2fr 2fr 0.8fr 0.8fr 0.8fr 1fr;
+    gap: 8px;
+    font-size: 12px;
+  }
+
+  .item-image {
+    width: 35px;
+    height: 35px;
+  }
+}
+
+@media (max-width: 900px) {
+  .order-header {
+    display: none;
+  }
+
+  .order-row {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+    border: 1px solid #e2e2e2;
+    border-radius: 6px;
+    margin-bottom: 15px;
+  }
+
+  .order-row hr {
+    display: none;
+  }
+
+  .order-id {
+    font-size: 18px;
+    border-bottom: 2px solid #ff5a5a;
+    padding-bottom: 10px;
+  }
+
+  .order-customer,
+  .order-items,
+  .order-total,
+  .order-payment,
+  .order-status,
+  .order-date {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .order-customer::before {
+    content: "Khách Hàng: ";
+    font-weight: 600;
+    color: #454545;
+  }
+
+  .order-items::before {
+    content: "Sản Phẩm: ";
+    font-weight: 600;
+    color: #454545;
+  }
+
+  .order-total::before {
+    content: "Tổng Tiền: ";
+    font-weight: 600;
+    color: #454545;
+  }
+
+  .order-payment::before {
+    content: "Thanh Toán: ";
+    font-weight: 600;
+    color: #454545;
+  }
+
+  .order-status::before {
+    content: "Trạng Thái: ";
+    font-weight: 600;
+    color: #454545;
+  }
+
+  .order-date::before {
+    content: "Ngày Đặt: ";
+    font-weight: 600;
+    color: #454545;
+  }
+
+  .order-customer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .order-customer::before {
+    margin-bottom: 5px;
+  }
+}
+
+@media (max-width: 500px) {
+  .order-list {
+    padding: 10px 15px;
+    margin: 10px;
+  }
+
+  .order-list h1 {
+    font-size: 20px;
+  }
+}
